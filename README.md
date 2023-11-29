@@ -1,4 +1,9 @@
-# SAT-Solving: Project 1 
+# Hashi Puzzle Solver
+
+Welcome to the Hashi Puzzle Solver! This program is designed to tackle the intriguing Hashi puzzles, also known as Hashiwokakero. It's a delightful logic puzzle where your goal is to connect islands with bridges according to specific rules.
+
+## About Hashi Puzzles
+Hashi puzzles consist of a grid of islands, each displaying a number indicating how many bridges should connect to it. The bridges can only run horizontally or vertically, and no more than two bridges can connect any pair of islands. Additionally, bridges cannot cross each other or run diagonally.
 
 ## Instructions
 
