@@ -23,16 +23,20 @@ def print_to_txt(n, model, num, gui):
                 file.write(f'{n[I(i)][j].val} ')
                 print(f'{n[I(i)][j].val} ', end=' ')
             else:
-                chunk = model[i:i + 4]
+                if I(i) == 0 or (I(i) == len(n) - 1) or j == 0 or (j == len(n[0]) - 1):
+                    file.write('~ ')
+                    print('~ ', end=' ')
+                else:
+                    chunk = model[i:i + 4]
 
-                to_write = '0 '
-                for c in chunk:
-                    if c > 0:
-                        # print corresponding bridge symbol from {v1, v1, h1, h2}
-                        to_write = chr(104 + ((c - i) // 3) *
-                                       14) + f"{((c + 1) % 2) + 1}"
-                file.write(to_write)
-                print(to_write, end=' ')
+                    to_write = '0 '
+                    for c in chunk:
+                        if c > 0:
+                            # print corresponding bridge symbol from {v1, v2, h1, h2}
+                            to_write = chr(104 + ((c - i) // 3) *
+                                        14) + f"{((c + 1) % 2) + 1}"
+                    file.write(to_write)
+                    print(to_write, end=' ')
 
             j += 1
             if (((i // 4) + 1) % len(n[0])) == 0:
