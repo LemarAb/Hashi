@@ -45,8 +45,7 @@ def build_constraints(field, neighbours):
                     # no cross: only one type of bridge on none island nodes
                     f.extend([[-n[i][j].h1, -n[i][j].v1], [-n[i][j].h2, -n[i][j].v2],
                               [-n[i][j].h1, -n[i][j].v2], [-n[i][j].h2, -n[i][j].v1],
-                              [-n[i][j].h1, -n[i][j].h2], [-n[i][j].h2, -n[i][j].h1],
-                              [-n[i][j].v2, -n[i][j].h1], [-n[i][j].v1, -n[i][j].v2],
+                              [-n[i][j].h1, -n[i][j].h2], [-n[i][j].v1, -n[i][j].v2],
                               ])
 
                     # continuity: bridges extend from an island node to an island node
