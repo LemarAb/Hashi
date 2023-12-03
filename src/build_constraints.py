@@ -80,6 +80,23 @@ def build_constraints(field, neighbours):
                     mapped_clauses = [[int(math.copysign(1, literal))*mapping[abs(literal)] for literal in clause] for clause in clauses]
 
                     f.extend(mapped_clauses)
+                    
+    def write_dimacs(cnf, filename):
+        with open(filename, 'w') as f:
+            f.write('p cnf {} {}\n'.format(len(cnf), len(cnf[0])))
+            for clause in cnf:
+                clause_str = ' '.join(str(lit) for lit in clause)
+                f.write(clause_str + ' 0\n')
+
+    # Example list of lists representing a CNF formula
+    cnf = [
+        [1, 2, -3],
+        [-1, -2, 3, 4],
+        [3, 5]
+    ]
+
+    # Write the CNF formula to a DIMACS file
+    write_dimacs(cnf, 'example.cnf')
 
     build_constraints()
 
