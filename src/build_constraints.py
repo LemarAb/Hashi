@@ -77,10 +77,13 @@ def build_constraints(field, neighbours):
                     mapping[7] = n[i][j+1].h1
                     mapping[8] = n[i][j+1].h2
 
-                    mapped_clauses = [[int(math.copysign(1, literal))*mapping[abs(literal)] for literal in clause] for clause in clauses]
+                    mapped_clauses = [[int(math.copysign(
+                        1, literal))*mapping[abs(literal)] for literal in clause] for clause in clauses]
 
                     f.extend(mapped_clauses)
-                    
+
+    build_constraints()
+
     def write_dimacs(cnf, filename):
         with open(filename, 'w') as f:
             f.write('p cnf {} {}\n'.format(len(cnf), len(cnf[0])))
@@ -88,16 +91,6 @@ def build_constraints(field, neighbours):
                 clause_str = ' '.join(str(lit) for lit in clause)
                 f.write(clause_str + ' 0\n')
 
-    # Example list of lists representing a CNF formula
-    cnf = [
-        [1, 2, -3],
-        [-1, -2, 3, 4],
-        [3, 5]
-    ]
-
-    # Write the CNF formula to a DIMACS file
-    write_dimacs(cnf, 'example.cnf')
-
-    build_constraints()
+    write_dimacs(f.clauses, 'example.cnf')
 
     return n, vpool, f
