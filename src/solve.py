@@ -38,9 +38,9 @@ def solve(vpool, f, neighbours, y):
         print("\nModel:\n")
         for m in s.enum_models():
             start = list(neighbours.keys())[0]
-            seen = set(start)
+            seen = set([start])
 
-            if dfs(start, m, neighbours, 0, seen) == len(neighbours.keys()):
+            if dfs(start, m, neighbours, 1, seen) == len(neighbours.keys()):
                 print(list(map(lambda x: vpool.obj(x) if x >
                       0 else '~' + vpool.obj(-x), m)))
                 print()

@@ -77,8 +77,7 @@ def build_constraints(field, neighbours):
                     mapping[7] = n[i][j+1].h1
                     mapping[8] = n[i][j+1].h2
 
-                    mapped_clauses = [[int(math.copysign(
-                        1, literal))*mapping[abs(literal)] for literal in clause] for clause in clauses]
+                    mapped_clauses = [[int(math.copysign(1, literal))*mapping[abs(literal)] for literal in clause] for clause in clauses]
 
                     f.extend(mapped_clauses)
 
