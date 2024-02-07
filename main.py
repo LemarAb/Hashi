@@ -1,4 +1,4 @@
-import timeit
+import time
 from src.parse_input import parse_input_field
 from src.initialize_field import initialise_field
 from src.build_constraints import build_constraints
@@ -34,15 +34,20 @@ def main(gui=False, numbr=1):
     field_info = parse_input_field(file)
     field, neighbours = initialise_field(
         field_info[0], field_info[1], field_info[2])
-    nodes, vpool, formula = build_constraints(field, neighbours)
-    output_folder = os.path.join(os.getcwd(), 'DIMACS')
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-    with open(f"{output_folder}/{'man_input' if gui else 'test'}{num}.cnf", 'w') as file:
-        file.write(formula.to_dimacs())
+    nodes, vpool, formula = build_constraints(field, gui, num)
     model = solve(vpool, formula, neighbours, field_info[1])
     print_to_txt(nodes, model, num, gui)
 
 
 if __name__ == "__main__":
+
+    start_time = time.time()
+
+    # Code to measure
+    # ...
     main()
+
+    end_time = time.time()
+    execution_time = end_time - start_time
+
+    print("Execution time: {:.6f} seconds".format(execution_time))

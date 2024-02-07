@@ -1,9 +1,10 @@
+import os
 from pysat.formula import CNF, IDPool
 from assets.bridge_sum import bridge_sum_CNF_opt as bridge_sum
 import math
 
 
-def build_constraints(field, neighbours):
+def build_constraints(field, from_gui, num):
     class Node:
         def __init__(self,
                      bridge_no,
@@ -63,7 +64,7 @@ def build_constraints(field, neighbours):
                              [n[i][j].h2], [n[i][j].v2]])
 
                     # degree: bridges built by an island must be equal to its node val
-                    clauses = bridge_sum[n[i][j].val]
+                    degree_clauses = bridge_sum[n[i][j].val]
 
                     # clauses for the degree constraint carry index integers, we need to map them to their corresponding value
                     mapping = {}
@@ -77,19 +78,20 @@ def build_constraints(field, neighbours):
                     mapping[7] = n[i][j+1].h1
                     mapping[8] = n[i][j+1].h2
 
-                    mapped_clauses = [[int(math.copysign(1, literal))*mapping[abs(literal)] for literal in clause] for clause in clauses]
+                    resolved_degree_clauses = [[int(math.copysign(1, literal))*mapping[abs(literal)] for literal in clause] for clause in degree_clauses]
 
-                    f.extend(mapped_clauses)
+                    f.extend(resolved_degree_clauses)
 
     build_constraints()
 
     def write_dimacs(cnf, filename):
         with open(filename, 'w') as f:
-            f.write('p cnf {} {}\n'.format(len(cnf), len(cnf[0])))
+            f.write('p cnf {} {}\n'.format(len(cnf), 4*len(field)*len(field[0])))
             for clause in cnf:
                 clause_str = ' '.join(str(lit) for lit in clause)
                 f.write(clause_str + ' 0\n')
 
-    write_dimacs(f.clauses, 'example.cnf')
+    output_folder = os.path.join(os.getcwd(), 'DIMACS')
+    write_dimacs(f.clauses, f"{output_folder}/{'man_input' if from_gui else 'test'}{num}.cnf")
 
     return n, vpool, f
