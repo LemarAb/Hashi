@@ -11,6 +11,6 @@ You can start the raw solver without the gui from terminal with `python main.py`
 
 ## Theory
 
-The reasoning behind the encoding is explained [here](Hashi.pdf).
+I explained the theory behind the encoding in [this paper](Hashi.pdf).
 
 
