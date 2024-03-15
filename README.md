@@ -11,8 +11,6 @@ You can start the raw solver without the gui from terminal with `python main.py`
 
 ## Theory
 
-The reasoning behind the encoding is explained [here](Hashi.pdf):
-
-![Alt text](assets/Hashi.png/?raw=true "Optional Title")
+The reasoning behind the encoding is explained [here](Hashi.pdf).
 
 
