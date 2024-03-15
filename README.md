@@ -13,6 +13,6 @@ You can start the raw solver without the gui from terminal with `python main.py`
 
 The reasoning behind the encoding is explained [here](Hashi.pdf):
 
-![Alt text](Hashi.pdf/?raw=true "Optional Title")
+![Alt text](assets/Hashi.png/?raw=true "Optional Title")
 
 
